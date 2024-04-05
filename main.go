@@ -1,39 +1,21 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-type contact struct {
-	email string
-	zipCode int
-}
-
-type person struct {
-	firstName string
-	lastName string
-	contact
-}
+type colourMAP map[string]string
 
 func main() {
-
-	alex := person{
-		firstName:"Alex", 
-		lastName: "Anderson",
-		contact: contact{
-			email: "alex@test.com",
-			zipCode: 8000,
-		},
+	colors :=colourMAP{
+		"red":   "#ff0000",
+		"white": "#ff1111",
+		"blue":  "#ff2222",
 	}
 
-	alex.updateName("Jimmy")
-	alex.print()
+	colors.mapPrint()
 }
 
-func (p person) print(){
-	fmt.Printf("%+v",p)
-}
-
-func (p *person) updateName(newFirstName string){
-	p.firstName = newFirstName
+func (m colourMAP) mapPrint() {
+    for key, items := range m {
+        fmt.Println(key, items)
+    }
 }
