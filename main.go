@@ -2,20 +2,29 @@ package main
 
 import "fmt"
 
-type colourMAP map[string]string
-
-func main() {
-	colors :=colourMAP{
-		"red":   "#ff0000",
-		"white": "#ff1111",
-		"blue":  "#ff2222",
-	}
-
-	colors.mapPrint()
+type bot interface {
+	getGreeting() string
 }
 
-func (m colourMAP) mapPrint() {
-    for key, items := range m {
-        fmt.Println(key, items)
-    }
+type englishBot struct{}
+type spanishBot struct{}
+
+func main() {
+	eb := englishBot{}
+	sb := spanishBot{}
+
+	printGreeting(eb)
+	printGreeting(sb)
+}
+
+func printGreeting(b bot) {
+	fmt.Println(b.getGreeting())
+}
+
+func (englishBot) getGreeting() string {
+	return "Hi there"
+}
+
+func (spanishBot) getGreeting() string {
+	return "Hola amigo"
 }
